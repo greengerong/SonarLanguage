@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Sonar Project language status</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="all"/>
+ <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+ <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/amcharts.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/report.js"></script>
+</head>
+<body>
+<div id="wrap" class="clearfix" ng-controller="report" ng-init="init();">
+    <header>
+        <div class="row-fluid">
+            <h1 style="color: #007067; float: left; padding: 10px;">Sonar Project language status</h1>
+        </div>
+        <hr/>
+    </header>
+
+    <section class="section">
+        <h2>Projects list</h2>
+        <table class="table table-hover">
+            <caption><h3>All Projects From Sonar</h3></caption>
+            <thead style="font-weight: bold;">
+            <tr>
+                <td style="width: 70%;" ng-click="sort('name');">Project name <span><i class="icon-arrow-up" ng-show="sortCondition.key=='name' && sortCondition.sort.name"></i><i class="icon-arrow-down" ng-show="sortCondition.key=='name' && !sortCondition.sort.name"></i></span></td>
+                <td ng-click="sort('lang');">Project Language <span><i class="icon-arrow-up" ng-show="sortCondition.key=='lang' && sortCondition.sort.lang"></i><i class="icon-arrow-down" ng-show="sortCondition.key=='lang' && !sortCondition.sort.lang"></i></span></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="2">
+                    <div class="form-search">
+                        <label for="searchName">Project name:</label>
+                        <input id="searchName" type="text" class="input-medium search-query" ng-model="searchName" ng-change="search();"/>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div style=" overflow: auto; height: 350px;">
+            <table class="table table-hover">
+                <tbody>
+                <tr ng-repeat="p in gridSource">
+                    <td style="width: 70%;">{{p.name}}</td>
+                    <td>{{p.lang}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <hr/>
+    <section class="section">
+        <h2>Language analysis</h2>
+
+        <div style="width:657px;height:400px;">
+            <div style="width:20%;float:left;height: 100%;"></div>
+            <div class="span5" style="width:60%; height: 100%; float:left;">
+                <div id="languageAnalysis" chart-data="getLanguageChartData();" style="height: 100%;"></div>
+            </div>
+
+
+        </div>
+
+    </section>
+
+    <footer>
+        <div id="footer">
+
+        </div>
+    </footer>
+</div>
+</body>
+</html>
