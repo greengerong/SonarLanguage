@@ -6,7 +6,7 @@ app = angular.module('app', [])
         {
           getColor: ->
                [r,g,b] = [(r+100), (g+400), (b + 200)]
-               "#" + ((r + 256 * g + 65536 * b).toString 16 )
+               "##{(r + 256 * g + 65536 * b).toString 16 }"
           ,
           reset:  -> 
                [r,g,b] = [10,10,0]                          
