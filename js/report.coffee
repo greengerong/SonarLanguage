@@ -1,6 +1,6 @@
 app = angular.module('app', [])
     .value("$host", "http://nemo.sonarsource.org")
-    .factory("$requestUrl", ($host) ->  $host + "/api/resources")
+    .factory("$requestUrl", ($host) ->   "#{$host}/api/resources")
     .factory("$dynamicColor", ($host) ->
         [r,g,b] = [10,10,0]
         {
@@ -82,6 +82,6 @@ report = ($scope, $window, $http, $requestUrl, $dynamicColor) ->
         @search();
 
     $scope.init = ->
-        $http.jsonp $requestUrl + "?callback=angularJsonpCallBack"
+        $http.jsonp  "#{$requestUrl}?callback=angularJsonpCallBack"
  
 app.controller "report", report
